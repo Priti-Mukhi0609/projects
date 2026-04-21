@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Figma Projects</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0d0d14;
+    --card: #13131f;
+    --border: rgba(255,255,255,0.07);
+    --accent1: #f72585;
+    --accent2: #7209b7;
+    --accent3: #4cc9f0;
+    --text: #f0f0f5;
+    --muted: #888899;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(247,37,133,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(247,37,133,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0.15; }
+  .orb1 { width: 500px; height: 500px; background: var(--accent1); top: -150px; right: -100px; }
+  .orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; left: -100px; }
+
+  header {
+    position: relative; z-index: 1;
+    text-align: center; padding: 80px 20px 50px;
+  }
+  .figma-icon {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Syne', sans-serif; font-size: 12px;
+    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent1);
+    border: 1px solid rgba(247,37,133,0.3);
+    padding: 7px 20px; border-radius: 20px; margin-bottom: 24px;
+    background: rgba(247,37,133,0.05);
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -1px; margin-bottom: 16px;
+  }
+  h1 span {
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .subtitle {
+    color: var(--muted); font-size: 1.05rem; font-weight: 300;
+    max-width: 440px; margin: 0 auto; line-height: 1.7;
+  }
+  .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--accent1), var(--accent3)); margin: 32px auto; border-radius: 2px; }
+
+  .cards {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; gap: 40px;
+    max-width: 860px; margin: 0 auto; padding: 0 20px 100px;
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeUp 0.6s ease both;
+  }
+  .card:nth-child(1) { animation-delay: 0.1s; --c: var(--accent1); }
+  .card:nth-child(2) { animation-delay: 0.25s; --c: var(--accent3); }
+  .card:nth-child(3) { animation-delay: 0.4s; --c: var(--accent2); }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--c); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-accent { height: 3px; background: linear-gradient(90deg, var(--c), transparent); }
+
+  .card-body { padding: 28px 32px 32px; }
+  .card-number {
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--c); margin-bottom: 10px; opacity: 0.8;
+  }
+  .card-title { font-family: 'Syne', sans-serif; font-size: 1.7rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -0.3px; }
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
+    background: rgba(255,255,255,0.06); color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .card-desc { color: var(--muted); font-size: 0.93rem; line-height: 1.7; margin-bottom: 28px; }
+
+  .btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; border-radius: 10px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    font-weight: 500; text-decoration: none; cursor: pointer;
+    transition: all 0.2s ease; border: none;
+  }
+  .btn-view { background: var(--c); color: #fff; }
+  .btn-view:hover { filter: brightness(1.15); transform: scale(1.04); }
+  .btn-download { background: transparent; color: var(--text); border: 1px solid rgba(255,255,255,0.15); }
+  .btn-download:hover { background: rgba(255,255,255,0.06); border-color: var(--c); color: var(--c); }
+  .btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  @media (max-width: 500px) { .card-body { padding: 22px 20px 24px; } }
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<header>
+  <div class="figma-icon">✦ Figma Designs</div>
+  <h1>My <span>Designs</span></h1>
+  <p class="subtitle">UI/UX projects designed in Figma — click to view or download any project.</p>
+  <div class="divider"></div>
+</header>
+
+<div class="cards">
+
+  <!-- Card 1: TV Screens -->
+  <div class="card">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="card-number">Project 01</div>
+      <div class="card-title">TV Screens</div>
+      <span class="tag">Solo Project</span>
+      <p class="card-desc">Recreated my actual TV interface screen by screen in Figma — every detail matched from real life. A personal challenge to replicate a real product as accurately as possible using UI/UX design skills.</p>
+      <div class="btns">
+        <a class="btn btn-view" href="https://drive.google.com/file/d/18jbjJ0HWf3hRl8BJAhwPZ6zajSZtTepH/view?usp=drive_link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+          View Design
+        </a>
+        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=18jbjJ0HWf3hRl8BJAhwPZ6zajSZtTepH" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Netflix Clone -->
+  <div class="card">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="card-number">Project 02</div>
+      <div class="card-title">Netflix Clone</div>
+      <span class="tag">Group Project</span>
+      <p class="card-desc">Designed a high-fidelity Netflix UI clone in Figma, focusing on user flows, responsiveness, and modern app aesthetics. Collaborated with a team to replicate the full streaming experience.</p>
+      <div class="btns">
+        <a class="btn btn-view" href="https://drive.google.com/file/d/150xksltNvLanAFsQrrq80wN6dK13mDBk/view?usp=drive_link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+          View Design
+        </a>
+        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=150xksltNvLanAFsQrrq80wN6dK13mDBk" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3: HDFC Bank -->
+  <div class="card">
+    <div class="card-accent"></div>
+    <div class="card-body">
+      <div class="card-number">Project 03</div>
+      <div class="card-title">HDFC Bank App</div>
+      <span class="tag">UI/UX Design</span>
+      <p class="card-desc">Quickly designed an HDFC Bank app interface in Figma with a clean and simple layout. Explored vertical scrolling interactions to simulate a real banking app experience with smooth navigation flow.</p>
+      <div class="btns">
+        <a class="btn btn-view" href="https://drive.google.com/file/d/1osAh8LdEErVb1tVtjlRKrOy4S-VEcElG/view?usp=drive_link" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+          View Design
+        </a>
+        <a class="btn btn-download" href="https://drive.google.com/uc?export=download&id=1osAh8LdEErVb1tVtjlRKrOy4S-VEcElG" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
